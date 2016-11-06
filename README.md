@@ -1,4 +1,6 @@
 # Paper-React
+The experimental UI components, to help us better maintenance and extension of the component.
+
 
 ## install
 
@@ -6,85 +8,55 @@
 $ yarn install paper-react
 ```
 
-## Demo
+# Usage
 
 ```js
+import React from 'react'
 import {Paper} from 'paper-react'
 
-const View = Paper('div')
-const FlexBox = Paper('div')
-const Item = Paper('button')
-const Divider = Paper('div', { style:{height: '1', margin: '10px 0', backgroundColor: 'rgb(223, 223, 223)'} })
+const View = Paper('div',{style:{display: 'flex', justifyContent:'space-around'}})
+const Button = Paper('button')
+const ButtonWithBackground = Paper('button', {style:{backgroundColor:'red'}})
 
-const paper = {
-  Column:{
-    style:{display: 'flex', flex: 1, flexDirection: 'column'},
+const view = {
+  green: {
+    style: {backgroundColor: 'green'}
   },
-  SpaceBetween: {
-    style:{display: 'flex', flex: 1, justifyContent: 'space-between'}
-  },
-  SpaceAround: {
-    style:{display: 'flex', flex: 1, justifyContent: 'space-around'}
-  },
-  Center: {
-    style:{display: 'flex', flex: 1, justifyContent: 'center'}
+  'say-hello': {
+    onClick: () => {alert('hello')}
   }
 }
 
-const item = {
-  start: {
-    style: {alignSelf: 'flex-start'}
-  },
-  center: {
-    style: {alignSelf: 'center'}
-  },
-  end:{
-    style: {alignSelf: 'flex-end'}
-  },
-}
+//render
+<View childProps={view}>
 
+  <Button>
+    init button
+  </Button>
 
-const Demo = ({}) => (
-    <View childProps={paper}>
-      <FlexBox state="Column" childProps={item}>
-        <Item state="start">😄</Item>
-        <Item state="center">😄</Item>
-        <Item state="end">😄</Item>
-      </FlexBox>
-      <Divider />
-      <FlexBox state="Column" childProps={item}>
-        <Item state="center">😄</Item>
-        <Item state="center">😄</Item>
-        <Item state="center">😄</Item>
-      </FlexBox>
-      <Divider />
-      <FlexBox state="Column" childProps={item}>
-        <Item state="end">😄</Item>
-        <Item state="center">😄</Item>
-        <Item state="start">😄</Item>
-      </FlexBox>
-      <Divider />
-      <FlexBox state="SpaceBetween">
-        <Item>😄</Item>
-        <Item>😄</Item>
-        <Item>😄</Item>
-      </FlexBox>
-      <Divider />
-      <FlexBox state="SpaceAround">
-        <Item>😄</Item>
-        <Item>😄</Item>
-        <Item>😄</Item>
-      </FlexBox>
-      <Divider />
-      <FlexBox state="Center">
-        <Item>😄</Item>
-        <Item>😄</Item>
-        <Item>😄</Item>
-      </FlexBox>
-    </View>
-  )
+  //add init style
+  <ButtonWithBackground>
+    i am red
+  </ButtonWithBackground>
+
+  //overwrite style
+  <ButtonWithBackground state="green">
+    overwrite red, i am blue
+  </ButtonWithBackground>
+
+  //add event
+  <Button state="say-hello">
+    click me
+  </Button>
+</View>
+
 
 ```
+
+
+## Demo
+- https://github.com/ncysatnaf/paper-react/blob/master/stories
+
 
 ## license
 
