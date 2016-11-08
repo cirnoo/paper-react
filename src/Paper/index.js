@@ -22,10 +22,12 @@ export default (element, init={style:{}}) => class Paper extends Component {
   }
 
   setChildProps = (state) => {
-    const {childProps} = this.props
-    return {
-      props:{
-        [state] : childProps[state] || {}
+    const {childProps, props} = this.props
+    if(childProps[state]){
+      return {
+        props:{
+          [state] : childProps[state] || {}
+        }
       }
     }
   }
@@ -34,12 +36,15 @@ export default (element, init={style:{}}) => class Paper extends Component {
     super(props)
   }
   render() {
+    if(this.props.render){
+      this.props.render(this.props)
+    }
+
     const { style, state, props } = this.props
     const children = Array.isArray(this.props.children) ? this.props.children : [this.props.children]
-
-    return React.createElement(element, props && {...init, ...this.getProps()}, children.length > 0 && React.Children.map(children, child => {
+    return React.createElement(element, {...init, ...this.getProps()}, children.length > 0 && React.Children.map(children, child => {
       if(React.isValidElement(child)){
-        return React.cloneElement(child, (child.props.state && this.props.childProps)? {...this.setChildProps(child.props.state)} : child.props )
+        return (child.props.state && this.props.childProps) ? React.cloneElement(child, {...this.setChildProps(child.props.state)}) : React.cloneElement(child)
       }else{
         return child
       }

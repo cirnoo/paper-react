@@ -27,7 +27,7 @@ export default () => (
     </ButtonWithBackground>
 
     <ButtonWithBackground state="green">
-      overwrite red, i am blue
+      overwrite red, i am green
     </ButtonWithBackground>
 
     <Button state="say-hello">

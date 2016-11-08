@@ -41,7 +41,7 @@ const view = {
 
   //overwrite style
   <ButtonWithBackground state="green">
-    overwrite red, i am blue
+    overwrite red, i am green
   </ButtonWithBackground>
 
   //add event
