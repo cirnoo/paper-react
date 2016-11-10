@@ -1,4 +1,5 @@
-import { storiesOf, action, linkTo } from '@kadira/storybook';
+import React from 'react'
+import { storiesOf, action, linkTo } from '@kadira/storybook'
 import paper from './paper'
 import button from './button'
 

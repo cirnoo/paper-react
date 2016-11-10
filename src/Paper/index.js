@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react'
+import React, {PropTypes, Component, Children} from 'react'
 
 export default (element, init={style:{}}) => class Paper extends Component {
   static PropTypes = {
@@ -13,8 +13,8 @@ export default (element, init={style:{}}) => class Paper extends Component {
   }
 
   getProps = () => {
-    const {state, props} = this.props
-    const {style, ...others} = props[state] || {}
+    const {state} = this.props
+    const {style, ...others} = this.props[state] || {}
     return {
       style: style ? {...init['style'], ...style} : init['style'],
       ...others
@@ -22,26 +22,22 @@ export default (element, init={style:{}}) => class Paper extends Component {
   }
 
   setChildProps = (state) => {
-    const {childProps, props} = this.props
+    const {childProps} = this.props
     if(childProps[state]){
       return {
-        props:{
-          [state] : childProps[state] || {}
-        }
+        [state] : childProps[state] || {}
       }
     }
   }
 
-  constructor(props) {
-    super(props)
-  }
   render() {
     if(this.props.render){
       this.props.render(this.props)
     }
 
-    const { style, state, props } = this.props
-    const children = Array.isArray(this.props.children) ? this.props.children : [this.props.children]
+    const { style, state } = this.props
+    const children = Children.toArray(this.props.children)
+
     return React.createElement(element, {...init, ...this.getProps()}, children.length > 0 && React.Children.map(children, child => {
       if(React.isValidElement(child)){
         return (child.props.state && this.props.childProps) ? React.cloneElement(child, {...this.setChildProps(child.props.state)}) : React.cloneElement(child)
