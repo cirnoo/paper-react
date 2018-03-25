@@ -1,7 +1,8 @@
 {
   "name": "paper-react",
   "version": "0.0.2",
-  "description": "The experimental UI components, to help us better maintenance and extension of the component.",
+  "description":
+    "The experimental UI components, to help us better maintenance and extension of the component.",
   "main": "./lib/index.js",
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
@@ -34,15 +35,12 @@
   "scripts": {
     "build": "rm -rf ./lib; mkdir ./lib; babel ./src --out-dir ./lib",
     "dev": "webpack --progress --colors --watch --mode=dev",
-    "test": "nyc jest ./__tests__",
+    "test": "nyc jest",
     "lint": "eslint src/",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "keywords": [
-    "modules",
-    "node"
-  ],
+  "keywords": ["modules", "node"],
   "author": "vaiii",
   "license": "MIT",
   "dependencies": {
